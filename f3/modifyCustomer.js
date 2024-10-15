@@ -10,15 +10,30 @@ let customers = [
     {id:9, name:"Ashlie Wozencraft", age:23, address:{city:"Espinosa", street:"78 Pepper Wood Terrace", house:11}, newsLetter: false},
     {id:10, name:"Jonas Tungate", age:83, address:{city:"Padangulaktanding", street:"224 Manley Drive", house:49}, newsLetter: true}
 ]
-function isAddress(address) {    
-    //TODO
+function isAddress(address) {
+    return address && typeof address.city === 'string' && typeof address.street === 'string' && typeof address.house === 'number';
 }
 
-function isCustomer(name, age, address, newsLetter) {    
-    //TODO
+function isCustomer(name, age, address, newsLetter) {
+    return typeof name === 'string' && typeof age === 'number' && isAddress(address) && typeof newsLetter === 'boolean';
 }
-function modifyCustomer (customer){
-    //TODO
+
+function modifyCustomer(customer) {
+    if (!isCustomer(customer.name, customer.age, customer.address, customer.newsLetter)) {
+        console.error('Invalid customer data');
+        return;
+    }
+
+    const existingCustomer = customers.find(c => c.id === customer.id);
+    if (existingCustomer) {
+        existingCustomer.name = customer.name;
+        existingCustomer.age = customer.age;
+        existingCustomer.address = customer.address;
+        existingCustomer.newsLetter = customer.newsLetter;
+        console.log(`Customer with ID ${customer.id} has been modified.`);
+    } else {
+        console.error(`Customer with ID ${customer.id} not found.`);
+    }
 }
 
 module.exports = modifyCustomer;

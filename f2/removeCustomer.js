@@ -12,6 +12,19 @@ let customers = [
 ]
 
 function removeCustomer(id) {
-    //TODO
+    const initialLength = customers.length;
+    customers = customers.filter(customer => customer.id !== id);
+    const newLength = customers.length;
+
+    if (newLength < initialLength) {
+        console.log(`Customer with ID ${id} has been removed.`);
+    } else {
+        console.log(`Customer with ID ${id} not found.`);
+    }
 }
-module.exports = removeCustomer;
+
+// Példa hívás a removeCustomer függvényre
+removeCustomer(5);
+console.log(customers);
+
+module.exports  = removeCustomer;
